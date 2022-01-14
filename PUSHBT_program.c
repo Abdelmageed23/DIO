@@ -75,11 +75,10 @@ sint8_t PushBt_debunncing(uint8_t Port , uint8_t Pin , uint8_t *varible)
 	else
 	{
 
-		static uint8_t State = 0;
+			static uint8_t State = 0;
 			static uint32_t highCounter = 0;
 			static uint32_t lowCounter = 0;
 			static uint8_t retVal = 0;
-		//	State = Dio_GetPinsValue(ButtonNumber);
 			DIO_GetPinVal(Port,Pin,&State);
 			uint8_t check ;
 			DIO_GetPinVal(Port,Pin,&check);
@@ -112,12 +111,12 @@ sint8_t PushBt_debunncing(uint8_t Port , uint8_t Pin , uint8_t *varible)
 					lowCounter ++;
 					highCounter = 0;
 				}
-				if (highCounter == 100)
+				if (highCounter == 200)
 				{
 					State = 1;
 					highCounter = 0;
 				}
-				else if (lowCounter == 100)
+				else if (lowCounter == 200)
 				{
 					State = 0;
 					lowCounter = 0;

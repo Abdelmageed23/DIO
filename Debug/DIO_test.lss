@@ -3,13 +3,13 @@ DIO_test.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000f70  00000000  00000000  00000074  2**1
+  0 .text         00000f68  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .bss          0000000a  00800060  00800060  00000fe4  2**0
+  1 .bss          0000000a  00800060  00800060  00000fdc  2**0
                   ALLOC
-  2 .stab         00001200  00000000  00000000  00000fe4  2**2
+  2 .stab         00001218  00000000  00000000  00000fdc  2**2
                   CONTENTS, READONLY, DEBUGGING
-  3 .stabstr      0000055c  00000000  00000000  000021e4  2**0
+  3 .stabstr      0000056e  00000000  00000000  000021f4  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -59,7 +59,7 @@ Disassembly of section .text:
   6c:	b1 07       	cpc	r27, r17
   6e:	e1 f7       	brne	.-8      	; 0x68 <.do_clear_bss_loop>
   70:	0e 94 7d 07 	call	0xefa	; 0xefa <main>
-  74:	0c 94 b6 07 	jmp	0xf6c	; 0xf6c <_exit>
+  74:	0c 94 b2 07 	jmp	0xf64	; 0xf64 <_exit>
 
 00000078 <__bad_interrupt>:
   78:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -2177,11 +2177,11 @@ sint8_t PushBt_debunncing(uint8_t Port , uint8_t Pin , uint8_t *varible)
  d58:	2f ef       	ldi	r18, 0xFF	; 255
  d5a:	28 87       	std	Y+8, r18	; 0x08
  d5c:	c4 c0       	rjmp	.+392    	; 0xee6 <PushBt_debunncing+0x1b0>
-		static uint8_t State = 0;
+
+			static uint8_t State = 0;
 			static uint32_t highCounter = 0;
 			static uint32_t lowCounter = 0;
 			static uint8_t retVal = 0;
-		//	State = Dio_GetPinsValue(ButtonNumber);
 			DIO_GetPinVal(Port,Pin,&State);
  d5e:	29 e6       	ldi	r18, 0x69	; 105
  d60:	30 e0       	ldi	r19, 0x00	; 0
@@ -2321,12 +2321,12 @@ sint8_t PushBt_debunncing(uint8_t Port , uint8_t Pin , uint8_t *varible)
  e70:	10 92 67 00 	sts	0x0067, r1
  e74:	10 92 68 00 	sts	0x0068, r1
 				}
-				if (highCounter == 100)
+				if (highCounter == 200)
  e78:	80 91 65 00 	lds	r24, 0x0065
  e7c:	90 91 66 00 	lds	r25, 0x0066
  e80:	a0 91 67 00 	lds	r26, 0x0067
  e84:	b0 91 68 00 	lds	r27, 0x0068
- e88:	84 36       	cpi	r24, 0x64	; 100
+ e88:	88 3c       	cpi	r24, 0xC8	; 200
  e8a:	91 05       	cpc	r25, r1
  e8c:	a1 05       	cpc	r26, r1
  e8e:	b1 05       	cpc	r27, r1
@@ -2342,12 +2342,12 @@ sint8_t PushBt_debunncing(uint8_t Port , uint8_t Pin , uint8_t *varible)
  ea4:	10 92 68 00 	sts	0x0068, r1
  ea8:	17 c0       	rjmp	.+46     	; 0xed8 <PushBt_debunncing+0x1a2>
 				}
-				else if (lowCounter == 100)
+				else if (lowCounter == 200)
  eaa:	80 91 61 00 	lds	r24, 0x0061
  eae:	90 91 62 00 	lds	r25, 0x0062
  eb2:	a0 91 63 00 	lds	r26, 0x0063
  eb6:	b0 91 64 00 	lds	r27, 0x0064
- eba:	84 36       	cpi	r24, 0x64	; 100
+ eba:	88 3c       	cpi	r24, 0xC8	; 200
  ebc:	91 05       	cpc	r25, r1
  ebe:	a1 05       	cpc	r26, r1
  ec0:	b1 05       	cpc	r27, r1
@@ -2394,12 +2394,11 @@ void main()
 {
  efa:	df 93       	push	r29
  efc:	cf 93       	push	r28
- efe:	0f 92       	push	r0
+ efe:	00 d0       	rcall	.+0      	; 0xf00 <main+0x6>
  f00:	cd b7       	in	r28, 0x3d	; 61
  f02:	de b7       	in	r29, 0x3e	; 62
-
 	uint8_t x=0;
- f04:	19 82       	std	Y+1, r1	; 0x01
+ f04:	1a 82       	std	Y+2, r1	; 0x02
 	LED_Init(LED_PORTB,4);
  f06:	82 e0       	ldi	r24, 0x02	; 2
  f08:	64 e0       	ldi	r22, 0x04	; 4
@@ -2423,52 +2422,45 @@ void main()
  f2c:	41 e0       	ldi	r20, 0x01	; 1
  f2e:	0e 94 c4 05 	call	0xb88	; 0xb88 <PushBt_init>
 
+	uint8_t u8_previous=0;
+ f32:	19 82       	std	Y+1, r1	; 0x01
 	while(1)
 	{
 		PushBt_GetState(PUSHBT_PORTB,2,&x);
- f32:	82 e0       	ldi	r24, 0x02	; 2
- f34:	62 e0       	ldi	r22, 0x02	; 2
- f36:	9e 01       	movw	r18, r28
- f38:	2f 5f       	subi	r18, 0xFF	; 255
- f3a:	3f 4f       	sbci	r19, 0xFF	; 255
- f3c:	a9 01       	movw	r20, r18
- f3e:	0e 94 31 06 	call	0xc62	; 0xc62 <PushBt_GetState>
- f42:	0c c0       	rjmp	.+24     	; 0xf5c <main+0x62>
-		while(x)
+ f34:	9e 01       	movw	r18, r28
+ f36:	2e 5f       	subi	r18, 0xFE	; 254
+ f38:	3f 4f       	sbci	r19, 0xFF	; 255
+ f3a:	82 e0       	ldi	r24, 0x02	; 2
+ f3c:	62 e0       	ldi	r22, 0x02	; 2
+ f3e:	a9 01       	movw	r20, r18
+ f40:	0e 94 31 06 	call	0xc62	; 0xc62 <PushBt_GetState>
+		if(x==1)
+ f44:	8a 81       	ldd	r24, Y+2	; 0x02
+ f46:	81 30       	cpi	r24, 0x01	; 1
+ f48:	51 f4       	brne	.+20     	; 0xf5e <main+0x64>
 		{
-			LED_ON(LED_PORTB,5);
- f44:	82 e0       	ldi	r24, 0x02	; 2
- f46:	65 e0       	ldi	r22, 0x05	; 5
- f48:	0e 94 71 05 	call	0xae2	; 0xae2 <LED_ON>
-			PushBt_GetState(PUSHBT_PORTB,2,&x);
- f4c:	82 e0       	ldi	r24, 0x02	; 2
- f4e:	62 e0       	ldi	r22, 0x02	; 2
- f50:	9e 01       	movw	r18, r28
- f52:	2f 5f       	subi	r18, 0xFF	; 255
- f54:	3f 4f       	sbci	r19, 0xFF	; 255
- f56:	a9 01       	movw	r20, r18
- f58:	0e 94 31 06 	call	0xc62	; 0xc62 <PushBt_GetState>
-	PushBt_init(PUSHBT_PORTB,2,PULL_DOWN);
+			if(x ==1 && u8_previous ==0)
+ f4a:	8a 81       	ldd	r24, Y+2	; 0x02
+ f4c:	81 30       	cpi	r24, 0x01	; 1
+ f4e:	39 f4       	brne	.+14     	; 0xf5e <main+0x64>
+ f50:	89 81       	ldd	r24, Y+1	; 0x01
+ f52:	88 23       	and	r24, r24
+ f54:	21 f4       	brne	.+8      	; 0xf5e <main+0x64>
+			{
+				LED_TOGGLE(LED_PORTB,5);
+ f56:	82 e0       	ldi	r24, 0x02	; 2
+ f58:	65 e0       	ldi	r22, 0x05	; 5
+ f5a:	0e 94 a9 05 	call	0xb52	; 0xb52 <LED_TOGGLE>
+			}
 
-	while(1)
-	{
-		PushBt_GetState(PUSHBT_PORTB,2,&x);
-		while(x)
- f5c:	89 81       	ldd	r24, Y+1	; 0x01
- f5e:	88 23       	and	r24, r24
- f60:	89 f7       	brne	.-30     	; 0xf44 <main+0x4a>
-		{
-			LED_ON(LED_PORTB,5);
-			PushBt_GetState(PUSHBT_PORTB,2,&x);
 		}
-		LED_OFF(LED_PORTB,5);
- f62:	82 e0       	ldi	r24, 0x02	; 2
- f64:	65 e0       	ldi	r22, 0x05	; 5
- f66:	0e 94 8d 05 	call	0xb1a	; 0xb1a <LED_OFF>
- f6a:	e3 cf       	rjmp	.-58     	; 0xf32 <main+0x38>
+		u8_previous =x;
+ f5e:	8a 81       	ldd	r24, Y+2	; 0x02
+ f60:	89 83       	std	Y+1, r24	; 0x01
+ f62:	e8 cf       	rjmp	.-48     	; 0xf34 <main+0x3a>
 
-00000f6c <_exit>:
- f6c:	f8 94       	cli
+00000f64 <_exit>:
+ f64:	f8 94       	cli
 
-00000f6e <__stop_program>:
- f6e:	ff cf       	rjmp	.-2      	; 0xf6e <__stop_program>
+00000f66 <__stop_program>:
+ f66:	ff cf       	rjmp	.-2      	; 0xf66 <__stop_program>

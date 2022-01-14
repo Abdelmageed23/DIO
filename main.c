@@ -21,14 +21,18 @@ void main()
 	PushBt_init(PUSHBT_PORTC,4,PULL_DOWN);
 	PushBt_init(PUSHBT_PORTB,2,PULL_DOWN);
 
+	uint8_t u8_previous=0;
 	while(1)
 	{
 		PushBt_GetState(PUSHBT_PORTB,2,&x);
-		while(x)
+		if(x==1)
 		{
-			LED_ON(LED_PORTB,5);
-			PushBt_GetState(PUSHBT_PORTB,2,&x);
+			if(x ==1 && u8_previous ==0)
+			{
+				LED_TOGGLE(LED_PORTB,5);
+			}
+
 		}
-		LED_OFF(LED_PORTB,5);
+		u8_previous =x;
 	}
 }
