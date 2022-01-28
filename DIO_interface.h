@@ -18,10 +18,10 @@
 
 /* GPIO PORTs*/
 
-#define PORTA 1
-#define PORTB 2
-#define PORTC 3
-#define PORTD 4
+#define DIO_PORTA 1
+#define DIO_PORTB 2
+#define DIO_PORTC 3
+#define DIO_PORTD 4
 
 
 

@@ -9,6 +9,43 @@
 
 
 
+typedef enum
+{
+	BTN0,
+	BTN1,
+
+}BTN_Num_t;
+
+
+sint8_t PushBt_init(BTN_Num_t BTN_NUM);
+sint8_t PushBt_GetState(BTN_Num_t BTN_NUM ,uint8_t *PinState);
+sint8_t PushBt_debunncing(BTN_Num_t BTN_NUM , uint8_t *varible);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Pin values */
 #define HIGH 1
 #define LOW  0
@@ -37,12 +74,6 @@
 #define PUSHBT_PIN5   5
 #define PUSHBT_PIN6   6
 #define PUSHBT_PIN7   7
-
-
-
-sint8_t PushBt_init(uint8_t Port , uint8_t Pin , uint8_t mode);
-sint8_t PushBt_GetState(uint8_t Port , uint8_t Pin , uint8_t *PinState);
-sint8_t PushBt_debunncing(uint8_t Port , uint8_t Pin , uint8_t *varible);
 
 
 #endif

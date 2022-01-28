@@ -14,67 +14,56 @@
 #include "PUSHBT_config.h"
 
 
-sint8_t PushBt_init(uint8_t Port , uint8_t Pin , uint8_t mode)
+sint8_t PushBt_init(BTN_Num_t BTN_NUM)
 {
-	if(Pin>7)
+	switch(BTN_NUM)
+		{
+		case BTN0 :
+				DIO_SetPinDircection(BTN0_PORT,BTN0_PIN,OUTPUT);
+				return OK;
+			break;
+		case BTN1 :
+				DIO_SetPinDircection(BTN1_PORT,BTN1_PIN,OUTPUT);
+				return OK;
+			break;
+		default:
+			return NOK;
+			break;
+		}
+}
+
+sint8_t PushBt_GetState(BTN_Num_t BTN_NUM ,uint8_t *PinState)
+{
+			switch(BTN_NUM)
 			{
+			case BTN0 :
+				DIO_GetPinVal(BTN0_PORT,BTN0_PIN,PinState);	break;
+			case BTN1 :
+				DIO_GetPinVal(BTN1_PORT,BTN1_PIN,PinState);	break;
+			default:
 				return -1;
 			}
-			else
-			{
-				switch(Port)
-				{
-				case PORTA: DIO_SetPinDircection(PORTA,Pin,INPUT);	break;
-				case PORTB: DIO_SetPinDircection(PORTB,Pin,INPUT);	break;
-				case PORTC: DIO_SetPinDircection(PORTC,Pin,INPUT);	break;
-				case PORTD: DIO_SetPinDircection(PORTD,Pin,INPUT);	break;
-				default: return -1;
-				}
-
-				if(mode == PULL_DOWN)
-				{
-					DIO_SetPinValue(Port,Pin,0);
-					return 1;
-				}
-				else if (mode == PULL_UP)
-				{
-					DIO_SetPinValue(Port,Pin,1);
-					return 1;
-				}
-				else return -1;
-			}
-}
-
-sint8_t PushBt_GetState(uint8_t Port , uint8_t Pin , uint8_t *PinState)
-{
-	if(Pin>7)
-		{
-			return -1;
-		}
-		else
-		{
-			switch(Port)
-			{
-			case PORTA: DIO_GetPinVal(PORTA,Pin,PinState);	break;
-			case PORTB: DIO_GetPinVal(PORTB,Pin,PinState);	break;
-			case PORTC: DIO_GetPinVal(PORTC,Pin,PinState);	break;
-			case PORTD: DIO_GetPinVal(PORTD,Pin,PinState);	break;
-			default: return -1;
-			}
-			PushBt_debunncing( Port ,  Pin , PinState);
+			PushBt_debunncing(BTN_NUM , PinState);
 			return 1;
-		}
+
 }
 
-sint8_t PushBt_debunncing(uint8_t Port , uint8_t Pin , uint8_t *varible)
+sint8_t PushBt_debunncing(BTN_Num_t BTN_NUM , uint8_t *varible)
 {
-	if(Pin>7)
+	uint8_t Port=0,Pin=0;
+	switch(BTN_NUM)
 	{
+	case BTN0:
+		Port =BTN0_PORT;
+		Pin = BTN0_PIN;
+		break;
+	case BTN1:
+			Port =BTN1_PORT;
+			Pin = BTN1_PIN;
+		break;
+	default:
 		return -1;
 	}
-	else
-	{
-
 			static uint8_t State = 0;
 			static uint32_t highCounter = 0;
 			static uint32_t lowCounter = 0;
@@ -125,6 +114,6 @@ sint8_t PushBt_debunncing(uint8_t Port , uint8_t Pin , uint8_t *varible)
 			}
 				*varible = retVal;
 				return 1;
-	}
-
 }
+
+

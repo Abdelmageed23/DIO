@@ -1,87 +1,116 @@
-/*********************************************************/
-/* Author  : Abdelrahman Mohamed              			 */
-/* Date     : 4 Jan	2022                   				 */
-/* Version  : V01                            			 */
-/*********************************************************/
+/*
+ * LED_Program.c
+ *
+ *  Created on: Jan 27, 2022
+ *      Author: Abdelrahman Mohamed
+ */
 
 #include "STD_TYPES.h"
 #include "BIT_MATH.h"
-
 #include "DIO_interface.h"
 
-#include "LED_interface.h"
-#include "LED_private.h"
 #include "LED_config.h"
+#include "LED_Interface.h"
 
-
-/*
- * Initializing LED as OUTPUT
- */
-sint8_t LED_Init(uint8_t PORT , uint8_t Pin)
+uint8_t LED_Init(LED_Num_t	LED_NUM)
 {
-	if(Pin>7)
+	switch(LED_NUM)
 	{
-		return -1;
-	}
-	else
-	{
-		DIO_SetPinDircection(PORT,Pin,OUTPUT);
-	return 1;
+	case LED0 :
+			DIO_SetPinDircection(LED0_PORT,LED0_PIN,OUTPUT);
+			return OK;
+		break;
+	case LED1 :
+			DIO_SetPinDircection(LED1_PORT,LED1_PIN,OUTPUT);
+			return OK;
+		break;
+	case LED2 :
+			DIO_SetPinDircection(LED2_PORT,LED2_PIN,OUTPUT);
+			return OK;
+		break;
+	case LED3 :
+			DIO_SetPinDircection(LED3_PORT,LED3_PIN,OUTPUT);
+			return OK;
+		break;
+	default:
+		return NOK;
+		break;
 	}
 }
-
-
-/*
- * Turn LED ON
- * INPUT : PORT , PIN
- * OUTPUT: 1 if ok -1 if not ok
- */
-sint8_t LED_ON(uint8_t PORT , uint8_t Pin)
+uint8_t LED_ON(LED_Num_t LED_NUM)
 {
-	if(Pin>7)
-	{
-		return -1;
-	}
-	else
-	{
-		DIO_SetPinValue(PORT,Pin,HIGH);
-	return 1;
-	}
-}
-
-/*
- * Turn LED OFF
- * INPUT : PORT , PIN
- * OUTPUT: 1 if ok -1 if not ok
- */
-sint8_t LED_OFF(uint8_t PORT , uint8_t Pin)
-{
-	if(Pin>7)
+	switch(LED_NUM)
 		{
-			return -1;
+		case LED0 :
+				DIO_SetPinValue(LED0_PORT,LED0_PIN,HIGH);
+				return OK;
+			break;
+		case LED1 :
+				DIO_SetPinValue(LED1_PORT,LED1_PIN,HIGH);
+				return OK;
+			break;
+		case LED2 :
+				DIO_SetPinValue(LED2_PORT,LED2_PIN,HIGH);
+				return OK;
+			break;
+		case LED3 :
+				DIO_SetPinValue(LED3_PORT,LED3_PIN,HIGH);
+				return OK;
+			break;
+		default:
+			return NOK;
+			break;
 		}
-		else
-		{
-			DIO_SetPinValue(PORT,Pin,LOW);
-			return 1;
-		}
-
 }
-
-/*
- * TOGGLE LED
- * INPUT : PORT , PIN
- * OUTPUT: 1 if ok -1 if not ok
- */
-sint8_t LED_TOGGLE(uint8_t PORT , uint8_t Pin)
+uint8_t LED_OFF(LED_Num_t LED_NUM)
 {
-	if(Pin>7)
-			{
-				return -1;
-			}
-			else
-			{
-			DIO_TogglePin(PORT,Pin);
-			return 1;
-			}
+	switch(LED_NUM)
+		{
+		case LED0 :
+				DIO_SetPinValue(LED0_PORT,LED0_PIN,LOW);
+				return OK;
+			break;
+		case LED1 :
+				DIO_SetPinValue(LED1_PORT,LED1_PIN,LOW);
+				return OK;
+			break;
+		case LED2 :
+				DIO_SetPinValue(LED2_PORT,LED2_PIN,LOW);
+				return OK;
+			break;
+		case LED3 :
+				DIO_SetPinValue(LED3_PORT,LED3_PIN,LOW);
+				return OK;
+			break;
+		default:
+			return NOK;
+			break;
+		}
 }
+
+uint8_t LED_TOGGLE(LED_Num_t LED_NUM)
+{
+	switch(LED_NUM)
+	{
+		case LED0 :
+				DIO_TogglePin(LED0_PORT,LED0_PIN);
+				return OK;
+			break;
+		case LED1 :
+				DIO_TogglePin(LED1_PORT,LED1_PIN);
+				return OK;
+			break;
+		case LED2 :
+				DIO_TogglePin(LED2_PORT,LED2_PIN);
+				return OK;
+			break;
+		case LED3 :
+				DIO_TogglePin(LED3_PORT,LED3_PIN);
+				return OK;
+			break;
+		default:
+			return NOK;
+			break;
+	}
+}
+

@@ -8,6 +8,7 @@
 #include "BIT_MATH.h"
 
 #include "DIO_interface.h"
+#include "DIO_Registers.h"
 #include "DIO_private.h"
 #include "DIO_config.h"
 
@@ -29,20 +30,20 @@ sint8_t DIO_SetPinDircection(uint8_t PORT , uint8_t PIN , uint8_t Mode)
 		{
 			switch(PORT)
 					{
-					case PORTA:
-						SET_BIT(DIO_DDRA,PIN);
+					case DIO_PORTA:
+						SET_BIT(DDRA,PIN);
 						return 1;
 						break;
-					case PORTB:
-						SET_BIT(DIO_DDRB,PIN);
+					case DIO_PORTB:
+						SET_BIT(DDRB,PIN);
 						return 1;
 						break;
-					case PORTC:
-						SET_BIT(DIO_DDRC,PIN);
+					case DIO_PORTC:
+						SET_BIT(DDRC,PIN);
 						return 1;
 						break;
-					case PORTD:
-						SET_BIT(DIO_DDRD,PIN);
+					case DIO_PORTD:
+						SET_BIT(DDRD,PIN);
 						return 1;
 						break;
 					default:
@@ -53,20 +54,20 @@ sint8_t DIO_SetPinDircection(uint8_t PORT , uint8_t PIN , uint8_t Mode)
 			{
 			switch(PORT)
 				{
-			case PORTA:
-				CLR_BIT(DIO_DDRA,PIN);
+			case DIO_PORTA:
+				CLR_BIT(DDRA,PIN);
 					return 1;
 					break;
-			case PORTB:
-				CLR_BIT(DIO_DDRB,PIN);
+			case DIO_PORTB:
+				CLR_BIT(DDRB,PIN);
 					return 1;
 					break;
-			case PORTC:
-				CLR_BIT(DIO_DDRC,PIN);
+			case DIO_PORTC:
+				CLR_BIT(DDRC,PIN);
 					return 1;
 					break;
-			case PORTD:
-				CLR_BIT(DIO_DDRD,PIN);
+			case DIO_PORTD:
+				CLR_BIT(DDRD,PIN);
 					return 1;
 					break;
 			default:
@@ -76,30 +77,30 @@ sint8_t DIO_SetPinDircection(uint8_t PORT , uint8_t PIN , uint8_t Mode)
 		else if (Mode == INPUT_PULLUP)
 		{
 			switch(PORT)
-							{
-						case PORTA:
-							CLR_BIT(DIO_DDRA,PIN);
-							SET_BIT(DIO_PORTA,PIN);
-								return 1;
-								break;
-						case PORTB:
-							CLR_BIT(DIO_DDRB,PIN);
-							SET_BIT(DIO_PORTB,PIN);
-								return 1;
-								break;
-						case PORTC:
-							CLR_BIT(DIO_DDRC,PIN);
-							SET_BIT(DIO_PORTC,PIN);
-								return 1;
-								break;
-						case PORTD:
-							CLR_BIT(DIO_DDRD,PIN);
-							SET_BIT(DIO_PORTD,PIN);
-								return 1;
-								break;
-						default:
-								return -2;
-							}
+				{
+			case DIO_PORTA:
+				CLR_BIT(DDRA,PIN);
+				SET_BIT(PORTA,PIN);
+					return 1;
+					break;
+			case DIO_PORTB:
+				CLR_BIT(DDRB,PIN);
+				SET_BIT(PORTB,PIN);
+					return 1;
+					break;
+			case DIO_PORTC:
+				CLR_BIT(DDRC,PIN);
+				SET_BIT(PORTC,PIN);
+					return 1;
+					break;
+			case DIO_PORTD:
+				CLR_BIT(DDRD,PIN);
+				SET_BIT(PORTD,PIN);
+					return 1;
+					break;
+			default:
+					return -2;
+				}
 		}
 		else
 		{
@@ -117,57 +118,57 @@ sint8_t DIO_SetPortDirection(uint8_t PORT, uint8_t Mode)
 {
 	switch(PORT)
 	{
-	case PORTA:
+	case DIO_PORTA:
 		if(Mode == OUTPUT)
 		{
-			DIO_DDRA =0xff;
+			DDRA =0xff;
 			return 1;
 		}
 		else if (Mode == INPUT)
 		{
-			DIO_DDRA = 0x00;
+			DDRA = 0x00;
 			return 1;
 		}
 		else
 			return -1;
 		break;
-	case PORTB:
+	case DIO_PORTB:
 			if(Mode == OUTPUT)
 			{
-				DIO_DDRB =0xff;
+				DDRB =0xff;
 				return 1;
 			}
 			else if (Mode == INPUT)
 			{
-				DIO_DDRB = 0x00;
+				DDRB = 0x00;
 				return 1;
 			}
 			else
 				return -1;
 			break;
-	case PORTC:
+	case DIO_PORTC:
 			if(Mode == OUTPUT)
 			{
-				DIO_DDRC =0xff;
+				DDRC =0xff;
 				return 1;
 			}
 			else if (Mode == INPUT)
 			{
-				DIO_DDRC = 0x00;
+				DDRC = 0x00;
 				return 1;
 			}
 			else
 				return -1;
 			break;
-	case PORTD:
+	case DIO_PORTD:
 			if(Mode == OUTPUT)
 			{
-				DIO_DDRD =0xff;
+				DDRD =0xff;
 				return 1;
 			}
 			else if (Mode == INPUT)
 			{
-				DIO_DDRD = 0x00;
+				DDRD = 0x00;
 				return 1;
 			}
 			else
@@ -196,20 +197,20 @@ sint8_t DIO_SetPinValue(uint8_t PORT , uint8_t PIN , uint8_t value)
 			{
 				switch(PORT)
 						{
-						case PORTA:
-							SET_BIT(DIO_PORTA,PIN);
+						case DIO_PORTA:
+							SET_BIT(PORTA,PIN);
 							return 1;
 							break;
-						case PORTB:
-							SET_BIT(DIO_PORTB,PIN);
+						case DIO_PORTB:
+							SET_BIT(PORTB,PIN);
 							return 1;
 							break;
-						case PORTC:
-							SET_BIT(DIO_PORTC,PIN);
+						case DIO_PORTC:
+							SET_BIT(PORTC,PIN);
 							return 1;
 							break;
-						case PORTD:
-							SET_BIT(DIO_PORTD,PIN);
+						case DIO_PORTD:
+							SET_BIT(PORTD,PIN);
 							return 1;
 							break;
 						default:
@@ -220,20 +221,20 @@ sint8_t DIO_SetPinValue(uint8_t PORT , uint8_t PIN , uint8_t value)
 				{
 				switch(PORT)
 					{
-				case PORTA:
-					CLR_BIT(DIO_PORTA,PIN);
+				case DIO_PORTA:
+					CLR_BIT(PORTA,PIN);
 						return 1;
 						break;
-				case PORTB:
-					CLR_BIT(DIO_PORTB,PIN);
+				case DIO_PORTB:
+					CLR_BIT(PORTB,PIN);
 						return 1;
 						break;
-				case PORTC:
-					CLR_BIT(DIO_PORTC,PIN);
+				case DIO_PORTC:
+					CLR_BIT(PORTC,PIN);
 						return 1;
 						break;
-				case PORTD:
-					CLR_BIT(DIO_PORTD,PIN);
+				case DIO_PORTD:
+					CLR_BIT(PORTD,PIN);
 						return 1;
 						break;
 				default:
@@ -257,20 +258,20 @@ sint8_t DIO_SetPortValue(uint8_t PORT , uint8_t value)
 {
 	switch(PORT)
 		{
-		case PORTA:
-			DIO_PORTA = value;
+		case DIO_PORTA:
+			PORTA = value;
 				return 1;
 				break;
-		case PORTB:
-				DIO_PORTB = value;
+		case DIO_PORTB:
+				PORTB = value;
 				return 1;
 				break;
-		case PORTC:
-				DIO_PORTC = value;
+		case DIO_PORTC:
+				PORTC = value;
 				return 1;
 				break;
-		case PORTD:
-				DIO_PORTD = value;
+		case DIO_PORTD:
+				PORTD = value;
 				return 1;
 				break;
 		default:
@@ -295,20 +296,20 @@ sint8_t DIO_GetPinVal(uint8_t PORT , uint8_t PIN , uint8_t * val)
 			{
 					switch(PORT)
 							{
-							case PORTA:
-								*val =  GET_BIT(DIO_PINA,PIN);
+							case DIO_PORTA:
+								*val =  GET_BIT(PINA,PIN);
 								return 1;
 								break;
-							case PORTB:
-								*val =  GET_BIT(DIO_PINB,PIN);
+							case DIO_PORTB:
+								*val =  GET_BIT(PINB,PIN);
 								return 1;
 								break;
-							case PORTC:
-								*val =  GET_BIT(DIO_PINC,PIN);
+							case DIO_PORTC:
+								*val =  GET_BIT(PINC,PIN);
 								return 1;
 								break;
-							case PORTD:
-								*val =  GET_BIT(DIO_PIND,PIN);
+							case DIO_PORTD:
+								*val =  GET_BIT(PIND,PIN);
 								return 1;
 								break;
 							default:
@@ -333,20 +334,20 @@ sint8_t DIO_TogglePin(uint8_t PORT , uint8_t PIN )
 		{
 				switch(PORT)
 						{
-						case PORTA:
-							TOGGLE_BIT(DIO_PORTA,PIN);
+						case DIO_PORTA:
+							TOGGLE_BIT(PORTA,PIN);
 							return 1;
 							break;
-						case PORTB:
-							TOGGLE_BIT(DIO_PORTB,PIN);
+						case DIO_PORTB:
+							TOGGLE_BIT(PORTB,PIN);
 							return 1;
 							break;
-						case PORTC:
-							TOGGLE_BIT(DIO_PORTC,PIN);
+						case DIO_PORTC:
+							TOGGLE_BIT(PORTC,PIN);
 							return 1;
 							break;
-						case PORTD:
-							TOGGLE_BIT(DIO_PORTD,PIN);
+						case DIO_PORTD:
+							TOGGLE_BIT(PORTD,PIN);
 							return 1;
 							break;
 						default:

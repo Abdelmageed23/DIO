@@ -15,21 +15,21 @@
 void main()
 {
 	uint8_t x=0;
-	LED_Init(LED_PORTB,4);
-	LED_Init(LED_PORTB,5);
-	LED_ON(LED_PORTB,4);
-	PushBt_init(PUSHBT_PORTC,4,PULL_DOWN);
-	PushBt_init(PUSHBT_PORTB,2,PULL_DOWN);
+	LED_Init(LED0);
+	LED_Init(LED1);
+	LED_ON(LED0);
+	PushBt_init(BTN0);
+	PushBt_init(BTN1);
 
 	uint8_t u8_previous=0;
 	while(1)
 	{
-		PushBt_GetState(PUSHBT_PORTB,2,&x);
+		PushBt_GetState(BTN0,&x);
 		if(x==1)
 		{
 			if(x ==1 && u8_previous ==0)
 			{
-				LED_TOGGLE(LED_PORTB,5);
+				LED_TOGGLE(LED1);
 			}
 
 		}

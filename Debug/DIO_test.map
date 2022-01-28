@@ -117,7 +117,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0xf68
+.text           0x00000000     0x1042
  *(.vectors)
  .vectors       0x00000000       0x54 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
                 0x00000000                __vectors
@@ -219,33 +219,33 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x00000986      0x124 ./DIO_program.o
                 0x00000986                DIO_TogglePin
  .text.LED_Init
-                0x00000aaa       0x38 ./LED_program.o
+                0x00000aaa       0x9e ./LED_program.o
                 0x00000aaa                LED_Init
- .text.LED_ON   0x00000ae2       0x38 ./LED_program.o
-                0x00000ae2                LED_ON
- .text.LED_OFF  0x00000b1a       0x38 ./LED_program.o
-                0x00000b1a                LED_OFF
+ .text.LED_ON   0x00000b48       0x9e ./LED_program.o
+                0x00000b48                LED_ON
+ .text.LED_OFF  0x00000be6       0x9e ./LED_program.o
+                0x00000be6                LED_OFF
  .text.LED_TOGGLE
-                0x00000b52       0x36 ./LED_program.o
-                0x00000b52                LED_TOGGLE
+                0x00000c84       0x96 ./LED_program.o
+                0x00000c84                LED_TOGGLE
  .text.PushBt_init
-                0x00000b88       0xda ./PUSHBT_program.o
-                0x00000b88                PushBt_init
+                0x00000d1a       0x5e ./PUSHBT_program.o
+                0x00000d1a                PushBt_init
  .text.PushBt_GetState
-                0x00000c62       0xd4 ./PUSHBT_program.o
-                0x00000c62                PushBt_GetState
+                0x00000d78       0x7c ./PUSHBT_program.o
+                0x00000d78                PushBt_GetState
  .text.PushBt_debunncing
-                0x00000d36      0x1c4 ./PUSHBT_program.o
-                0x00000d36                PushBt_debunncing
- .text.main     0x00000efa       0x6a ./main.o
-                0x00000efa                main
- .text.libgcc   0x00000f64        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .text.libgcc   0x00000f64        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
-                0x00000f64                . = ALIGN (0x2)
+                0x00000df4      0x1f2 ./PUSHBT_program.o
+                0x00000df4                PushBt_debunncing
+ .text.main     0x00000fe6       0x58 ./main.o
+                0x00000fe6                main
+ .text.libgcc   0x0000103e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x0000103e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+                0x0000103e                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000f64        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
-                0x00000f64                exit
-                0x00000f64                _exit
+ .fini9         0x0000103e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                0x0000103e                exit
+                0x0000103e                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -264,11 +264,11 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000f64        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000103e        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000f68                _etext = .
+                0x00001042                _etext = .
 
-.data           0x00800060        0x0 load address 0x00000f68
+.data           0x00800060        0x0 load address 0x00001042
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
@@ -297,18 +297,18 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .bss           0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
  .bss           0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
  *(.bss*)
- .bss.retVal.1268
+ .bss.retVal.1255
                 0x00800060        0x1 ./PUSHBT_program.o
- .bss.lowCounter.1267
+ .bss.lowCounter.1254
                 0x00800061        0x4 ./PUSHBT_program.o
- .bss.highCounter.1266
+ .bss.highCounter.1253
                 0x00800065        0x4 ./PUSHBT_program.o
- .bss.State.1265
+ .bss.State.1252
                 0x00800069        0x1 ./PUSHBT_program.o
  *(COMMON)
                 0x0080006a                PROVIDE (__bss_end, .)
-                0x00000f68                __data_load_start = LOADADDR (.data)
-                0x00000f68                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00001042                __data_load_start = LOADADDR (.data)
+                0x00001042                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0080006a        0x0
                 0x0080006a                PROVIDE (__noinit_start, .)
@@ -333,19 +333,19 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
 .signature
  *(.signature*)
 
-.stab           0x00000000     0x1218
+.stab           0x00000000     0x132c
  *(.stab)
  .stab          0x00000000      0x918 ./DIO_program.o
- .stab          0x00000918      0x294 ./LED_program.o
-                                0x330 (size before relaxing)
- .stab          0x00000bac      0x4b0 ./PUSHBT_program.o
-                                0x54c (size before relaxing)
- .stab          0x0000105c      0x1bc ./main.o
-                                0x258 (size before relaxing)
+ .stab          0x00000918      0x3b4 ./LED_program.o
+                                0x450 (size before relaxing)
+ .stab          0x00000ccc      0x468 ./PUSHBT_program.o
+                                0x504 (size before relaxing)
+ .stab          0x00001134      0x1f8 ./main.o
+                                0x2b8 (size before relaxing)
 
-.stabstr        0x00000000      0x56e
+.stabstr        0x00000000      0x62a
  *(.stabstr)
- .stabstr       0x00000000      0x56e ./DIO_program.o
+ .stabstr       0x00000000      0x62a ./DIO_program.o
 
 .stab.excl
  *(.stab.excl)
